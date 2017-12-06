@@ -1,27 +1,23 @@
 (function () {
-  var info = document.querySelectorAll('.thumbInfo img'),
-  modelName = document.querySelector('.modelName'),
-  priceInfo = document.querySelector('.priceInfo'),
-  modelDetails = document.querySelector('modelDetails');
+  var carButtons = document.querySelectorAll('.data-ref');
+  
+  function getCarData() {
+    let model = document.querySelector('.modelName');
+    let price = document.querySelector('.priceInfo');
+    let desc = document.querySelector('.modelDetails');
 
-  function changeElements() {
+    model.innerHTML = carData[this.id].model;
+    price.innerHTML = "$" + carData[this.id].price;
+    desc.innerHTML = carData[this.id].description;
 
-    let carIndex = carData[this.id];
+    carButtons.forEach(function(car, index) {
+      car.classList.add('nonActive');
+    });
 
+    this.classList.remove('nonActive');
   }
 
-  info.forEach(function(car) {
-
-
-      car.addEventListener('click',changeElements, false);
-
-
-    });
-    modelName.firstChild.nodeValue = carIndex.modelT;
-    modelDetails.firstChild.nodeValue = carIndex.text;
-    appliedClass = this.id;
-
-    modelName.classList.add(this.id);
-//modelName.classList.add(this.id);
-
-  })();
+  carButtons.forEach(function(car, index) {
+    car.addEventListener('click', getCarData, false);
+  });
+})();
